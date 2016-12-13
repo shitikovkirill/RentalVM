@@ -1,21 +1,36 @@
 My MVC framework
 =======================
 
-Demo
+installation
 ------------
-http://my-framework.chelseagrin.in.ua
+<p>Download or git clone</p>
+<p>In root dir execute command: php -S 127.0.0.1:8000</p>
 
 I used such resourceses
 ---------------------------
-
-PHP:<br>
-    Doctrine<br>
-    Twig<br>
-    
-CSS:<br>
-    bootstrap
-    
-JavaScript:<br>
-    jquery.cropit<br>
-    jquery.tmpl<br>
-    jquery.validate<br>
+<ul>
+    <li>Base:
+        <ul>
+            <li>Sqlite</li>
+        </ul>
+    </li>
+    <li>
+    PHP:
+        <ul>
+            <li>Twig</li>
+        </ul>
+    </li>
+    <li>
+    CSS:
+        <ul>
+            <li>Bootstrap</li>
+        </ul>
+    </li>
+    <li>
+    JavaScript:
+        <ul>
+            <li>jquery.tmpl</li>
+            <li>jquery.validate</li>
+        </ul>
+    </li>
+</ul>
