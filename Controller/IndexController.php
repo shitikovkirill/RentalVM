@@ -14,8 +14,8 @@ use Model\FeedbackModel;
 
 class IndexController extends BaseController
 {
-    public function indexAction(array $parameters){
-
+    public function indexAction(array $parameters)
+    {
         return [];
     }
 }
