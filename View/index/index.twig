@@ -1,0 +1,160 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <div class="row">
+        {% for item in items %}
+            {% if item.accept %}
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1>{{ item.name }}</h1>
+                    </div>
+                    <div class="col-md-2">
+                        {% if admin_logged %}
+                            <a class="nav-link" href="/feedback/edit/{{ item.id }}">Edit</a>
+                        {% endif %}
+                        {% if item.changed %}
+                            <p>Изменен админом</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div>{{ item.email }}</div>
+                        <p class="lead">{{ item.comments }}</p>
+                        <div>{{ item.createtime|date('d.m.Y') }}</div>
+                    </div>
+                    <div class="col-md-4">
+                        {% if item.image %}
+                            <img src="{{ item.image }}">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        <div id="preview-bloc"></div>
+    </div>
+    <div class = "row">
+        {{ show_massage() }}
+        <form id="form" action="/feedback/save" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Имя">
+                <small id="emailHelp" class="form-text text-muted">На фронтэнде валидация: ^[a-zA-Z0-9]+$ на бекенде ^[a-zA-Z]+$ - для демонстрации двойной валидации</small>
+            </div>
+            <div class="form-group">
+                <textarea name="comment" class="form-control" id="comment" rows="3" placeholder="Текст поста"></textarea>
+            </div>
+
+            <button type="submit" name="submit" id="send-submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function() {
+            $('.image-editor').cropit();
+        });
+    </script>
+    <script>
+        var dataItem = {
+            email:      null,
+            name:       null,
+            comment:    null,
+            time: function(){
+                var $time;
+                var date = new Date();
+                $time = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
+                return $time;
+            },
+            img_URL:    null,
+        }
+
+        jQuery('#preview').click(function (event) {
+
+            event.preventDefault();
+
+            // Move cropped image data to hidden input
+            var imageData = $('.image-editor').cropit('export');
+            $('.hidden-image-data').val(imageData);
+            dataItem.img_URL = imageData;
+
+            dataItem.email   = jQuery('#email').val();
+            dataItem.name    = jQuery('#name').val();
+            dataItem.comment = jQuery('#comment').val();
+
+            if(validate_form().form()){
+                $('#preview-bloc').html('');
+                $('#feedback-tmpl').tmpl(dataItem).appendTo('#preview-bloc');
+                console.log($("#preview-bloc #image_upload_preview"));
+            }
+        });
+    </script>
+    <script id="feedback-tmpl" type="text/x-jquery-tmpl">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-10">
+                    <h1>${ name }</h1>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div>${ email }</div>
+                    <p class="lead">${ comment }</p>
+                    <div>${ time() }</div>
+                </div>
+                <div class="col-md-4" style="width:340px; height:260px">
+                    <img width="340px" height="260px" id="image_upload_preview" src="${ img_URL }" alt="your image" />
+                </div>
+            </div>
+        </div>
+    </script>
+    <script>
+        // just for the demos, avoids form submit
+        $.validator.addMethod(
+                "regex",
+                function(value, element, regexp) {
+                    var re = new RegExp(regexp);
+                    return this.optional(element) || re.test(value);
+                },
+                "Введены неразрешонные символы."
+            );
+        $.validator.addMethod(
+                'filesize',
+                function(value, element, param) {
+                    return this.optional(element) || (element.files[0].size <= param)
+                });
+
+        function validate_form() {
+            return $( "#form" ).validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    name: {
+                        required: true,
+                        regex: '^[а-яА-Яa-zA-Z0-9 ]+$'
+                    },
+                    comment: {
+                        required: true
+                    },
+                    fileToUpload: {
+                        required: true,
+                        accept: "image/jpeg, image/pjpeg, image/png, image/gif",
+                        filesize: 1048576
+                    }
+                },
+                messages: {
+                    fileToUpload: "Файл должен иметь формат JPG, GIF или PNG, размер должен быть меньше 1MB"
+                }
+            });
+        }
+        validate_form();
+    </script>
+{% endblock %}

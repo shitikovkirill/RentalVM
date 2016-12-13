@@ -1,0 +1,10 @@
+{
+  "name": "bootstrap",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.4",
+    "validator-js": "*",
+    "jquery.validate": "*",
+    "image-scale": "*"
+  }
+}
