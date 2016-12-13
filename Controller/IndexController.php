@@ -11,11 +11,14 @@ namespace Controller;
 
 use Core\BaseController;
 use Model\FeedbackModel;
+use Model\PostModel;
 
 class IndexController extends BaseController
 {
     public function indexAction(array $parameters)
     {
-        return [];
+        $postModel = new PostModel($this->getDbConection());
+        $posts = $postModel -> getAll();
+        return ['items'=>$posts];
     }
 }

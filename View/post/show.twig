@@ -1,27 +1,35 @@
 {% extends 'base.twig' %}
 
 {% block content %}
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-2">
+                Author name:
+            </div>
+            <div class="col-md-10">
+                <h1><a href="/post/show/{{ item.id }}">{{ item.author }}</a></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                Text:
+            </div>
+            <div class="col-md-10">
+                <p class="lead">{{ item.text }}</p>
+                <div>{{ item.created|date('d.m.Y') }}</div>
+            </div>
+        </div>
+    </div>
     <div class = "row">
         {{ show_massage() }}
-        <form id="form" action="/feedback/save_after_edit" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" value="{{ feedback.email }}">
-            </div>
+        <h3>Add comment</h3>
+        <form id="form" action="/comment/add" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Имя" value="{{ feedback.name }}">
                 <small id="emailHelp" class="form-text text-muted">На фронтэнде валидация: ^[a-zA-Z0-9]+$ на бекенде ^[a-zA-Z]+$ - для демонстрации двойной валидации</small>
             </div>
             <div class="form-group">
                 <textarea name="comment" class="form-control" id="comment" rows="3" placeholder="Коментарии">{{ feedback.comments }}</textarea>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="accept" {% if feedback.accept %} checked {% endif %}">
-                    Разрешить публикацию
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*,image/jpeg,image/png">
             </div>
             <input type="hidden" name="id" value="{{ feedback.id }}">
             <button type="submit" name="submit" id="send-submit" class="btn btn-primary">Изменить</button>
@@ -44,10 +52,6 @@
         function validate_form() {
             return $( "#form" ).validate({
                 rules: {
-                    email: {
-                        required: true,
-                        email: true
-                    },
                     name: {
                         required: true,
                         regex: '^[а-яА-Яa-zA-Z0-9 ]+$'
@@ -55,10 +59,6 @@
                     comment: {
                         required: true
                     },
-                    fileToUpload: {
-                        accept: "image/*",
-                        filesize: 1048576
-                    }
                 },
                 messages: {
                     fileToUpload: "Файл должен иметь формат JPG, GIF или PNG, размер должен быть меньше 1MB"

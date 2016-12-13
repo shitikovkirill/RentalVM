@@ -2,20 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: kirill
- * Date: 16.09.16
- * Time: 14:02
+ * Date: 13.12.16
+ * Time: 21:24
  */
 
 namespace Controller;
 
 
 use Core\BaseController;
-use Model\PostModel;
-use Plasticbrain\FlashMessages\FlashMessages;
+use Model\CommentModel;
 
-class PostController extends BaseController
+class CommentController extends BaseController
 {
-    public function saveAction(array $parameters)
+    public function addAction(array $parameters)
     {
         if (isset($_POST['submit'])) {
 
@@ -25,9 +24,9 @@ class PostController extends BaseController
                 FILTER_VALIDATE_REGEXP,
                 array("options"=>array("regexp"=>'/^[a-zA-ZА-Яа-яЁё\s]+$/'))
             );
-            $text = filter_input(
+            $comment = filter_input(
                 INPUT_POST,
-                'text',
+                'comment',
                 FILTER_VALIDATE_REGEXP,
                 array("options"=>array("regexp"=>"/.{10,}/"))
             );
@@ -36,9 +35,9 @@ class PostController extends BaseController
             $msg = new FlashMessages();
 
             if (empty($name)) {
-                $msg->error('Имя должно содержать только a-zA-Z');
+                $msg->error('Имя должно содержать только a-zA-ZА-Яа-яЁё');
             }
-            if (empty($text)) {
+            if (empty($comment)) {
                 $msg->error('Текст должен быть больше 10 символов');
             }
 
@@ -46,20 +45,13 @@ class PostController extends BaseController
                 $url = '/';
                 header('Location: '.$url);
             } else {
-                $postModel = new PostModel($this->getDbConection());
-                $postModel ->save($name, $text);
-                $msg->info('Отзыв добавлен');
+                $commentModel = new CommentModel($this->getDbConection());
+                $commentModel ->save($name, $comment);
+                $msg->info('Котентарий добавлен');
             }
         }
         $url = '/';
         header('Location: '.$url);
         return [];
-    }
-
-    public function showAction(array $parameters)
-    {
-        $postModel = new PostModel($this->getDbConection());
-        $post = $postModel -> get($parameters[0]);
-        return ['item' => $post ];
     }
 }

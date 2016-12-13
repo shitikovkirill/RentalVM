@@ -3,35 +3,26 @@
 {% block content %}
     <div class="row">
         {% for item in items %}
-            {% if item.accept %}
             <div class="jumbotron">
                 <div class="row">
-                    <div class="col-md-10">
-                        <h1>{{ item.name }}</h1>
-                    </div>
                     <div class="col-md-2">
-                        {% if admin_logged %}
-                            <a class="nav-link" href="/feedback/edit/{{ item.id }}">Edit</a>
-                        {% endif %}
-                        {% if item.changed %}
-                            <p>Изменен админом</p>
-                        {% endif %}
+                       Author name:
+                    </div>
+                    <div class="col-md-10">
+                        <h1><a href="/post/show/{{ item.id }}">{{ item.author }}</a></h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
-                        <div>{{ item.email }}</div>
-                        <p class="lead">{{ item.texts }}</p>
-                        <div>{{ item.createtime|date('d.m.Y') }}</div>
+                    <div class="col-md-2">
+                        Text:
                     </div>
-                    <div class="col-md-4">
-                        {% if item.image %}
-                            <img src="{{ item.image }}">
-                        {% endif %}
+                    <div class="col-md-10">
+                        <p class="lead">{{ item.text }}</p>
+                        <div>{{ item.created|date('d.m.Y') }}</div>
+                        <div><a href="/post/show/{{ item.id }}">Edit</a></div>
                     </div>
                 </div>
             </div>
-            {% endif %}
         {% endfor %}
         <div id="preview-bloc"></div>
     </div>
