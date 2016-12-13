@@ -19,6 +19,12 @@ class IndexController extends BaseController
     {
         $postModel = new PostModel($this->getDbConection());
         $posts = $postModel -> getAll();
-        return ['items'=>$posts];
+
+        $posts_with_comments = $postModel->getPostsOrderByCountComment();
+
+        return [
+            'posts'=>$posts,
+            'posts_with_comments'=>$posts_with_comments,
+        ];
     }
 }

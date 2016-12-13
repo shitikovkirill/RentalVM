@@ -11,13 +11,19 @@ namespace Controller;
 
 use Core\BaseController;
 use Model\CommentModel;
+use Plasticbrain\FlashMessages\FlashMessages;
 
 class CommentController extends BaseController
 {
     public function addAction(array $parameters)
     {
         if (isset($_POST['submit'])) {
-
+            $id  = filter_input(
+                INPUT_POST,
+                'id',
+                FILTER_VALIDATE_REGEXP,
+                array("options"=>array("regexp"=>'/^[0-9]+$/'))
+            );
             $name  = filter_input(
                 INPUT_POST,
                 'name',
@@ -34,6 +40,9 @@ class CommentController extends BaseController
             if (!session_id()) @session_start();
             $msg = new FlashMessages();
 
+            if (empty($id)) {
+                $msg->error('Неверный id поста');
+            }
             if (empty($name)) {
                 $msg->error('Имя должно содержать только a-zA-ZА-Яа-яЁё');
             }
@@ -46,11 +55,11 @@ class CommentController extends BaseController
                 header('Location: '.$url);
             } else {
                 $commentModel = new CommentModel($this->getDbConection());
-                $commentModel ->save($name, $comment);
-                $msg->info('Котентарий добавлен');
+                $commentModel ->save($name, $comment, $id);
+                $msg->info('Комментарий добавлен');
             }
         }
-        $url = '/';
+        $url = '/post/show/'.$id;
         header('Location: '.$url);
         return [];
     }

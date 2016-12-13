@@ -10,6 +10,7 @@ namespace Controller;
 
 
 use Core\BaseController;
+use Model\CommentModel;
 use Model\PostModel;
 use Plasticbrain\FlashMessages\FlashMessages;
 
@@ -48,7 +49,7 @@ class PostController extends BaseController
             } else {
                 $postModel = new PostModel($this->getDbConection());
                 $postModel ->save($name, $text);
-                $msg->info('Отзыв добавлен');
+                $msg->info('Запись добавлена');
             }
         }
         $url = '/';
@@ -60,6 +61,13 @@ class PostController extends BaseController
     {
         $postModel = new PostModel($this->getDbConection());
         $post = $postModel -> get($parameters[0]);
-        return ['item' => $post ];
+
+        $commentModel = new CommentModel($this->getDbConection());
+        $comments = $commentModel ->getByPost($parameters[0]);
+
+        return [
+            'post' => $post,
+            'comments' =>$comments,
+        ];
     }
 }
