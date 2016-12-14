@@ -4,7 +4,12 @@ My MVC framework
 installation
 ------------
 <p>Download or git clone</p>
-<p>In root dir execute command: php -S 127.0.0.1:8000</p>
+<p>In root dir execute command: 
+<ul>
+    <li>composer install</li>
+    <li>php -S 127.0.0.1:8000</li>
+</ul>
+</p>
 
 I used such resourceses
 ---------------------------
