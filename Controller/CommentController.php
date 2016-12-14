@@ -17,21 +17,21 @@ class CommentController extends BaseController
 {
     public function addAction(array $parameters)
     {
-        if (isset($_POST['submit'])) {
+        if (isset($_GET['submit'])) {
             $id  = filter_input(
-                INPUT_POST,
+                INPUT_GET,
                 'id',
                 FILTER_VALIDATE_REGEXP,
                 array("options"=>array("regexp"=>'/^[0-9]+$/'))
             );
             $name  = filter_input(
-                INPUT_POST,
+                INPUT_GET,
                 'name',
                 FILTER_VALIDATE_REGEXP,
                 array("options"=>array("regexp"=>'/^[a-zA-ZА-Яа-яЁё\s]+$/'))
             );
             $comment = filter_input(
-                INPUT_POST,
+                INPUT_GET,
                 'comment',
                 FILTER_VALIDATE_REGEXP,
                 array("options"=>array("regexp"=>"/.{10,}/"))
@@ -51,7 +51,7 @@ class CommentController extends BaseController
             }
 
             if ($msg->hasErrors()) {
-                $url = '/';
+                $url = '/post/show/'.$id;
                 header('Location: '.$url);
             } else {
                 $commentModel = new CommentModel($this->getDbConection());

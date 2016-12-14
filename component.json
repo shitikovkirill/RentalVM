@@ -2,9 +2,24 @@
   "name": "bootstrap",
   "version": "1.0.0",
   "dependencies": {
+    "jquery": "*",
     "bootstrap": "v4.0.0-alpha.4",
     "validator-js": "*",
-    "jquery.validate": "*",
-    "image-scale": "*"
-  }
+    "jquery.validate": "*"
+  },
+  "homepage": "https://github.com/shitikovkirill/v-jet",
+  "authors": [
+    "shitikovkirill <sh.kiruh@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets",
+    "test",
+    "tests"
+  ]
 }

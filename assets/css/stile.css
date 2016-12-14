@@ -1,0 +1,10 @@
+/* Show it's not fixed to the top */
+body {
+  min-height: 75rem;
+}
+fieldset {
+  margin: 20px;
+}
+.container{
+  margin: 30px auto;
+}

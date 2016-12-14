@@ -22,7 +22,7 @@ class Request
         $this->request  = $_REQUEST;
         $this->server   = $_SERVER;
         $this->cookies = $_COOKIE;
-        $this->path     = $this->parsUrl(@$_SERVER['REQUEST_URI']);
+        $this->path     = $this->parsUrl(@$_SERVER['PATH_INFO']);
     }
     
     public function get($key)

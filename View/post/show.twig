@@ -6,7 +6,7 @@
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-2">
-                    Author name:
+                    Имя автора:
                 </div>
                 <div class="col-md-10">
                     <h1>{{ post.author }}</h1>
@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    Text:
+                    Tекст:
                 </div>
                 <div class="col-md-10">
                     <p class="lead">{{ post.text }}</p>
@@ -29,7 +29,7 @@
         {% for comment in comments %}
             <li class="list-group-item">
                 <div>
-                    <h4>Name: {{ comment.author }}</h4>
+                    <h4>Имя: {{ comment.author }}</h4>
                     <p>{{ comment.text }}</p>
                 </div>
             </li>
@@ -37,15 +37,14 @@
         </ul>
     </div>
 
-    <div class="col-md-12 m-t-3">
-        <h3>Add comment</h3>
-        <form id="form" action="/comment/add" method="post" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <h3>Добавить коментарий</h3>
+        <form id="form" action="/comment/add" method="GET" enctype="multipart/form-data">
             <div class="form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Имя" value="{{ feedback.name }}">
-                <small id="emailHelp" class="form-text text-muted">На фронтэнде валидация: ^[a-zA-Z0-9]+$ на бекенде ^[a-zA-Z]+$ - для демонстрации двойной валидации</small>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Имя" value="">
             </div>
             <div class="form-group">
-                <textarea name="comment" class="form-control" id="comment" rows="3" placeholder="Коментарии">{{ feedback.comments }}</textarea>
+                <textarea name="comment" class="form-control" id="comment" rows="3" placeholder="Коментарии"></textarea>
             </div>
             <input type="hidden" name="id" value="{{ post.id }}">
             <button type="submit" name="submit" id="send-submit" class="btn btn-primary">Изменить</button>
@@ -55,7 +54,6 @@
 
 {% block js %}
     <script>
-        // just for the demos, avoids form submit
         jQuery.validator.addMethod(
                 "regex",
                 function(value, element, regexp) {
@@ -70,10 +68,11 @@
                 rules: {
                     name: {
                         required: true,
-                        regex: '^[а-яА-Яa-zA-Z0-9 ]+$'
+                        regex: '^[а-яА-Яa-zA-Z ]+$'
                     },
                     comment: {
-                        required: true
+                        required: true,
+                        minlength: 10
                     },
                 },
                 messages: {

@@ -2,18 +2,36 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-10 offset-md-2 m-b-2">
-            <ul class="list-group">
-                {% for post in posts_with_comments %}
-                    <li class="list-group-item">
-                        <div>
-                            <h4>Имя: {{ post.author }}</h4>
-                            <p>{{ post.text }}</p>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    {% for key, post in posts_with_comments %}
+                    <li data-target="#carousel-example-generic" data-slide-to="{{ key }}" class="{% if key==0 %}active{% endif %}"></li>
+                    {% endfor %}
+                </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                {% for key, post in posts_with_comments %}
+                    <div class="item
+                    {% if key==0 %}active{% endif %}">
+                        <div class="col-md-12">
+                            <div class="col-md-6 col-md-offset-3">
+                                <h4 class="center">Имя: {{ post.author }}</h4>
+                                <p>{{ post.text }}</p>
+                            </div>
                         </div>
-                    </li>
+                    </div>
                 {% endfor %}
-            </ul>
-        </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div> <!-- Carousel -->
     </div>
 
     <div class="row">
@@ -30,7 +48,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        Течт:
+                        Текст:
                     </div>
                     <div class="col-md-10">
                         <p class="lead">{{ post.text }}</p>
@@ -48,7 +66,6 @@
 
             <div class="form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Имя">
-                <small id="emailHelp" class="form-text text-muted">На фронтэнде валидация: ^[a-zA-Z0-9]+$ на бекенде ^[a-zA-Z]+$ - для демонстрации двойной валидации</small>
             </div>
             <div class="form-group">
                 <textarea name="text" class="form-control" id="text" rows="3" placeholder="Текст поста"></textarea>
@@ -62,7 +79,9 @@
 
 {% block js %}
     <script>
-        // just for the demos, avoids form submit
+        $('.carousel').carousel({
+            interval: 3000
+        })
         $.validator.addMethod(
                 "regex",
                 function(value, element, regexp) {
@@ -82,10 +101,11 @@
                 rules: {
                     name: {
                         required: true,
-                        regex: '^[а-яА-Яa-zA-Z0-9 ]+$'
+                        regex: '^[а-яА-Яa-zA-Z ]+$'
                     },
                     text: {
-                        required: true
+                        required: true,
+                        minlength: 10
                     },
                 },
                 messages: {
