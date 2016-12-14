@@ -54,7 +54,7 @@
                         <p class="lead">{{ post.text|slice(0, 100) }}...</p>
                         <div>Дата: {{ post.created|date('d.m.Y') }}</div>
                         <div>Количество комментариев: {{ post.comment_count }}</div>
-                        <div><a href="/post/show/{{ post.id }}">Просмотреть</a> </div>
+                        <div><a class="btn btn-info" href="/post/show/{{ post.id }}">Просмотреть</a> </div>
                     </div>
                 </div>
             </div>
