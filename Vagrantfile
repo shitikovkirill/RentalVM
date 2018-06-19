@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
         vb.memory = "2048"
     end
 
+    config.vm.provision "shell", privileged: true, path: "bootstrap/update.sh"
     config.vm.provision "shell", privileged: false, path: "bootstrap/git.sh"
     config.vm.provision "shell", privileged: true, path: "bootstrap/nginx/script.sh"
     config.vm.provision "shell", privileged: true, path: "bootstrap/virtualenv/script.sh"
