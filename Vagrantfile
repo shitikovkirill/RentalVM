@@ -9,8 +9,12 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.provision "shell", privileged: true, path: "bootstrap/update.sh"
+    config.vm.provision "shell", privileged: false, path: "bootstrap/np_update.sh"
+
     config.vm.provision "shell", privileged: false, path: "bootstrap/git.sh"
     config.vm.provision "shell", privileged: true, path: "bootstrap/nginx/script.sh"
     config.vm.provision "shell", privileged: true, path: "bootstrap/virtualenv/script.sh"
+
     config.vm.provision "shell", privileged: true, path: "bootstrap/ember/script.sh"
+    config.vm.provision "shell", privileged: false, path: "bootstrap/ember/np.sh"
 end
