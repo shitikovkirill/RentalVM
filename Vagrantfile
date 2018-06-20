@@ -31,8 +31,8 @@ Vagrant.configure("2") do |config|
         fi
     SHELL
 
-    #config.vm.provision "shell", privileged: true, path: "bootstrap/update.sh"
-    #config.vm.provision "shell", privileged: false, path: "bootstrap/np_update.sh"
+    config.vm.provision "shell", privileged: true, path: "bootstrap/update.sh"
+    config.vm.provision "shell", privileged: false, path: "bootstrap/np_update.sh"
 
     config.vm.provision "shell", privileged: false, path: "bootstrap/git.sh"
 
