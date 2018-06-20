@@ -1,3 +1,7 @@
+#!/bin/bash
+
+echo -e "\e[34mUpdate yaourt"
+
 cd /tmp
 sudo pacman -S --needed base-devel git wget yajl --noconfirm
 git clone https://aur.archlinux.org/package-query.git

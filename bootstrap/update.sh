@@ -1,5 +1,4 @@
 #!/bin/bash
 
+echo -e "\e[34mUpdate system"
 pacman -Syyu --noconfirm
-
-#sudo pacman -R yaourt package-query --noconfirm

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "Install nginx"
+echo -e "\e[34mInstall nginx"
 pacman -S nginx --noconfirm
