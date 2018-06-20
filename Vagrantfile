@@ -10,9 +10,9 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", privileged: false, inline: <<-SHELL
         echo -e "\e[34mSet PROJECT_DIR"
 
-        if [ -z $WORKON_HOME ]
+        if [ -z $PROJECT_DIR ]
         then
-            echo -e "\e[34mCreate PROJECT_DIR var"
+            echo -e "\e[38;5;11mCreate PROJECT_DIR var"
             echo "export PROJECT_DIR=/vagrant" >> ~/.profile
         fi
 
