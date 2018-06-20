@@ -9,21 +9,38 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "shell", privileged: false, inline: <<-SHELL
         echo -e "\e[34mSet PROJECT_DIR"
-        echo "export PROJECT_DIR=/vagrant/"
 
-        cd /home/vagrant
-        ln -s /vagrant/RentalEmber .
-        ln -s /vagrant/RentalDjango .
+        if [ -z $WORKON_HOME ]
+        then
+            echo -e "\e[34mCreate PROJECT_DIR var"
+            echo "export PROJECT_DIR=/vagrant" >> ~/.profile
+        fi
+
+        if [ -L "/home/vagrant/RentalEmber" ]
+        then
+            echo -e "\e[34mRentalEmber link exist"
+        else
+            ln -s /vagrant/RentalEmber /home/vagrant
+        fi
+
+        if [ -L "/home/vagrant/RentalDjango" ]
+        then
+            echo -e "\e[34mRentalDjango link exist"
+        else
+            ln -s /vagrant/RentalDjango /home/vagrant
+        fi
     SHELL
 
-    config.vm.provision "shell", privileged: true, path: "bootstrap/update.sh"
-    config.vm.provision "shell", privileged: false, path: "bootstrap/np_update.sh"
+    #config.vm.provision "shell", privileged: true, path: "bootstrap/update.sh"
+    #config.vm.provision "shell", privileged: false, path: "bootstrap/np_update.sh"
 
     config.vm.provision "shell", privileged: false, path: "bootstrap/git.sh"
 
-    config.vm.provision "shell", privileged: true, path: "bootstrap/nginx/script.sh"
-    config.vm.provision "shell", privileged: true, path: "bootstrap/virtualenv/script.sh"
+    config.vm.provision "shell", privileged: true, path: "bootstrap/nginx/root.sh"
 
-    config.vm.provision "shell", privileged: true, path: "bootstrap/ember/script.sh"
+    config.vm.provision "shell", privileged: true, path: "bootstrap/virtualenv/root.sh"
+    config.vm.provision "shell", privileged: false, path: "bootstrap/virtualenv/np.sh"
+
+    config.vm.provision "shell", privileged: true, path: "bootstrap/ember/root.sh"
     config.vm.provision "shell", privileged: false, path: "bootstrap/ember/np.sh"
 end
