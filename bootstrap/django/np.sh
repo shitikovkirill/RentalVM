@@ -1,4 +1,10 @@
 echo -e "\e[34mInstall pip"
+
+if [ ! -z $WORKON_HOME ]
+then
+    source /usr/bin/virtualenvwrapper.sh
+fi
+
 workon RentalDjango
 pip install -r $PROJECT_DIR/RentalDjango/requirements.txt
 

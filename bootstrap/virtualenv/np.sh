@@ -9,6 +9,8 @@ then
 
     export WORKON_HOME=~/.virtualenvs;
     source /usr/bin/virtualenvwrapper.sh
+else
+    source /usr/bin/virtualenvwrapper.sh
 fi
 
 echo -e "\e[34mCreate virtualenv"
