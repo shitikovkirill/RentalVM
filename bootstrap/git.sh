@@ -1,5 +1,7 @@
 #!/bin/bash
+source /home/vagrant/.profile
 
+echo -e "\e[95mPROJECT_DIR=$PROJECT_DIR"
 cd $PROJECT_DIR
 
 echo -e "\e[34mGIT"

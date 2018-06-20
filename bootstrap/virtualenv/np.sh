@@ -1,4 +1,5 @@
 #!/bin/bash
+source /home/vagrant/.profile
 
 echo -e "\e[34mSetting virtualenvwrapper"
 if [ -z $WORKON_HOME ]

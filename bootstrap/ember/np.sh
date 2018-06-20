@@ -1,4 +1,5 @@
 #!/bin/bash
+source /home/vagrant/.profile
 
 cd $PROJECT_DIR/RentalEmber
 

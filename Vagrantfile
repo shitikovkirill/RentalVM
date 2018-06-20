@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.provision "shell", privileged: false, inline: <<-SHELL
+        source /home/vagrant/.profile
         echo -e "\e[34mSet PROJECT_DIR"
 
         if [ -z $PROJECT_DIR ]
