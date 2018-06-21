@@ -15,4 +15,7 @@ else
 fi
 
 echo -e "\e[34mCreate virtualenv"
-mkvirtualenv RentalDjango
+if [ -z $(workon | grep RentalDjango) ]
+then
+    mkvirtualenv --python=python3 RentalDjango
+fi
