@@ -1,6 +1,5 @@
 #!/bin/bash
 source /home/vagrant/.profile
-source /usr/bin/virtualenvwrapper.sh
 
 echo -e "\e[34mInstall pip"
 workon RentalDjango
