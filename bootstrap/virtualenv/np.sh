@@ -1,6 +1,5 @@
 #!/bin/bash
 source /home/vagrant/.profile
-source /usr/bin/virtualenvwrapper.sh
 
 echo -e "\e[34mSetting virtualenvwrapper"
 if [ -z $WORKON_HOME ]
@@ -16,4 +15,4 @@ else
 fi
 
 echo -e "\e[34mCreate virtualenv"
-mkvirtualenv --python=python3 RentalDjango
+mkvirtualenv RentalDjango
