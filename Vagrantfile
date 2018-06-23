@@ -12,6 +12,11 @@ Vagrant.configure("2") do |config|
         source /home/vagrant/.profile
         echo -e "\e[34mSet PROJECT_DIR"
 
+        if [ -z $(grep "~/.profile" ~/.bash_profile) ]
+        then
+            echo "[[ -f ~/.profile ]] && . ~/.profile" >> ~/.bash_profile
+        fi
+
         if [ -z $PROJECT_DIR ]
         then
             echo -e "\e[38;5;11mCreate PROJECT_DIR var"
