@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=vagrant
 Group=vagrant
-EnvironmentFile=/home/vagrant/.profile
+Environment=DATABASE_URL=sqlite:////vagrant/RentalDjango/db.sqlite
 Restart=always
 WorkingDirectory=/vagrant/RentalDjango
 ReadWriteDirectories=/vagrant/RentalDjango
