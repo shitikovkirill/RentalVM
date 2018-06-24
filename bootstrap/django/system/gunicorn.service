@@ -9,7 +9,7 @@ Environment=DATABASE_URL=sqlite:////vagrant/RentalDjango/db.sqlite
 Restart=always
 WorkingDirectory=/vagrant/RentalDjango
 ReadWriteDirectories=/vagrant/RentalDjango
-ExecStart=/home/vagrant/.virtualenvs/RentalDjango/bin/gunicorn --bind 0.0.0.0:8000 rental_project.wsgi:application
+ExecStart=/home/vagrant/.virtualenvs/RentalDjango/bin/gunicorn --bind 0.0.0.0:8001 rental_project.wsgi:application
 
 [Install]
 WantedBy=multi-user.target

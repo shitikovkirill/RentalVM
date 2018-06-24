@@ -43,8 +43,6 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "shell", privileged: false, path: "bootstrap/git.sh"
 
-    config.vm.provision "shell", privileged: true, path: "bootstrap/nginx/root.sh"
-
     config.vm.provision "shell", privileged: true, path: "bootstrap/virtualenv/root.sh"
     config.vm.provision "shell", privileged: false, path: "bootstrap/virtualenv/np.sh"
 
@@ -53,4 +51,6 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "shell", privileged: true, path: "bootstrap/ember/root.sh"
     config.vm.provision "shell", privileged: false, path: "bootstrap/ember/np.sh"
+
+    config.vm.provision "shell", privileged: true, path: "bootstrap/nginx/root.sh"
 end
