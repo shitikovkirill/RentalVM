@@ -1,0 +1,15 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=vagrant
+Group=vagrant
+EnvironmentFile=/home/vagrant/.profile
+Restart=always
+WorkingDirectory=/vagrant/RentalDjango
+ReadWriteDirectories=/vagrant/RentalDjango
+ExecStart=/home/vagrant/.virtualenvs/RentalDjango/bin/gunicorn --bind 0.0.0.0:8000 rental_project.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

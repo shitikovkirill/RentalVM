@@ -11,8 +11,8 @@ fi
 
 cd $PROJECT_DIR/RentalEmber
 
-echo -e "\e[34mInstall NPM"
-npm install
+echo -e "\e[34mInstall yarn"
+yarn install
 
 echo -e "\e[34mInstall Bower"
 sudo bower install --allow-root
