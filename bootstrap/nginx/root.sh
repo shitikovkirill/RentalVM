@@ -18,6 +18,7 @@ cp $PROJECT_DIR/bootstrap/nginx/config/nginx.conf /etc/nginx/nginx.conf
 
 mkdir -p /etc/nginx/sites-enabled/
 mkdir -p /home/vagrant/EmberDist
+chown -R vagrant:vagrant /home/vagrant/EmberDist
 echo "You mast deploy ember project here;" > /home/vagrant/EmberDist/index.html
 
 echo -e "\e[35;4m=========================================================="

@@ -2,4 +2,5 @@
 
 echo -e "\e[34mUpdate system"
 pacman -Sy --noconfirm
-sudo pacman -S htop --noconfirm
+
+sudo pacman -S htop rsync --noconfirm
