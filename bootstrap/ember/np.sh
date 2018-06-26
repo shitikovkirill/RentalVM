@@ -4,9 +4,7 @@ source /home/vagrant/.profile
 if [ -z $(which watchman) ]
 then
     echo -e "\e[34mInstall watchman"
-    yaourt -S watchman --noconfirm
-else
-    w
+    #yaourt -S watchman --noconfirm
 fi
 
 cd $PROJECT_DIR/RentalEmber
