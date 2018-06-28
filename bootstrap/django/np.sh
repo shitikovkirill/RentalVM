@@ -16,3 +16,4 @@ echo -e "\e[34mPrepare Django"
 cd $PROJECT_DIR/RentalDjango
 python manage.py makemigrations
 python manage.py migrate
+python manage.py collectstatic -c --no-input
