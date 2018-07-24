@@ -10,7 +10,7 @@ Restart=always
 RestartSec=30
 StartLimitIntervalSec=30
 StartLimitBurst=30
-Environment=DATABASE_URL=sqlite:////vagrant/RentalDjango/db.sqlite
+Environment=DATABASE_URL=sqlite:///db.sqlite
 WorkingDirectory=/vagrant/RentalDjango
 ReadWriteDirectories=/vagrant/RentalDjango
 ExecStart=/home/vagrant/.virtualenvs/RentalDjango/bin/gunicorn --bind 0.0.0.0:8001 rental_project.wsgi:application
