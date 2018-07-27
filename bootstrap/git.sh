@@ -11,8 +11,6 @@ git submodule update
 
 cd $PROJECT_DIR/RentalEmber
 git checkout master
-git pull
 
 cd $PROJECT_DIR/RentalDjango
 git checkout master
-git pull
